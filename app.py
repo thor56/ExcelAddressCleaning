@@ -13,16 +13,17 @@ def index():
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
-
+    filename = ""
     if request.method == 'POST':
         f = request.files['csvfile']
         f.save( f.filename)
+        filename = f.filename
         df = pd.read_csv(f.filename)
         print(df)
-        return process(df)
+        return process(df, filename)
     return "None"
             
-def process(df):
+def process(df, filename1):
 
     # df = pd.read_csv('Before.csv')
     # df['Opening hours'] = df['Opening hours'].map(stemmingWords)
@@ -36,12 +37,12 @@ def process(df):
     df['Location'] = df['Location'].map(location)
     print(df)
     output = df.to_csv(index=False)
-    
+    os.remove(filename1)
     return Response(
         output ,
         mimetype="text/csv",
         headers={"Content-disposition":
-                 "attachment; filename=myplot.csv"})
+                 "attachment; filename={}".format("after_" + filename1)})
 
 
 def stemmingWords(sentence):
