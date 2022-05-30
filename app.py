@@ -2,9 +2,12 @@
 import csv
 import os
 from flask import Flask, Response, render_template, request
+from flask_bootstrap import Bootstrap
+
 import pandas as pd
 
 app = Flask(__name__)
+Bootstrap(app)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -16,6 +19,8 @@ def data():
     filename = ""
     if request.method == 'POST':
         f = request.files['csvfile']
+        if f.filename == '':
+            f = request.files['csvfile1']
         f.save( f.filename)
         filename = f.filename
         df = pd.read_csv(f.filename)
