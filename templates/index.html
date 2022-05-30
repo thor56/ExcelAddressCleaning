@@ -10,6 +10,16 @@
   href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
   rel="stylesheet"
 />
+
+<link
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+
 <style>
   body {
     font-family: sans-serif;
@@ -97,9 +107,194 @@
     color: #15824b;
     padding: 60px 0;
   }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-family: ui-system, sans-serif;
+    color: #333;
+    min-height: 100vh;
+    background: rgba(243, 162, 185, 0.2);
+  }
+
+  .wrapper {
+    width: 350px;
+  }
+  .wrapper button,
+  .wrapper textarea {
+    display: block;
+    width: 100%;
+    margin: 0 auto 10px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    border-radius: 4px;
+    font: inherit;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, 0.05);
+  }
+  .wrapper button:focus,
+  .wrapper textarea:focus {
+    outline: none;
+  }
+  .wrapper textarea {
+    height: 200px;
+    padding: 10px 15px;
+    line-height: 1.5;
+    resize: none;
+  }
+  .wrapper button {
+    padding: 8px 0;
+    color: #fff;
+    text-transform: uppercase;
+    background: rgba(243, 162, 185, 0.85);
+    transition: 0.25s;
+    cursor: pointer;
+  }
+  .wrapper button:hover {
+    background: #f3a2b9;
+  }
+
+  .notice {
+    position: fixed;
+    top: 30px;
+    left: 0;
+    right: 0;
+    width: 250px;
+    margin: auto;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(51, 51, 51, 0.03);
+    z-index: 100;
+    visibility: hidden;
+  }
+  .notice.visible {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+  }
+
+  @-webkit-keyframes fadein {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      top: 30px;
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadein {
+    from {
+      top: 0;
+      opacity: 0;
+    }
+    to {
+      top: 30px;
+      opacity: 1;
+    }
+  }
+  @-webkit-keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes fadeout {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .hideIt {
+    display: none;
+  }
+
+  button.btn.add::before {
+    font-family: fontAwesome;
+    content: "\f067\00a0";
+  }
+
+  button.btn.edit::before {
+    font-family: fontAwesome;
+    content: "\f044\00a0";
+  }
+
+  button.btn.save::before {
+    font-family: fontAwesome;
+    content: "\f00c\00a0";
+  }
+
+  button.btn.cancel::before {
+    font-family: fontAwesome;
+    content: "\f00d\00a0";
+  }
+
+  .table {
+    margin: 10px;
+  }
 </style>
+<script>
+  function Openinghours() {
+    var copyText = document.getElementById("myInput1");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput1").innerHTML);
+  }
+
+  function State() {
+    var copyText = document.getElementById("myInput2");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput2").innerHTML);
+  }
+  function PhoneNumber() {
+    var copyText = document.getElementById("myInput3");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput3").innerHTML);
+  }
+  function Name() {
+    var copyText = document.getElementById("myInput4");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput4").innerHTML);
+  }
+  function Locations() {
+    var copyText = document.getElementById("myInput5");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput5").innerHTML);
+  }
+</script>
+<script
+  src="https://kit.fontawesome.com/8d8b23e812.js"
+  crossorigin="anonymous"
+></script>
+
 {% endblock %} {% endblock %} {% block content %}
 <div class="main-content">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
   <script
     class="jsbin"
     src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"
@@ -117,7 +312,63 @@
         </div>
       </div>
     </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ColumnName</th>
+          <th>Copy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Opening hours</td>
+          <td>
+            <button class="btn" type="button" onclick="Openinghours()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>State</td>
+          <td>
+            <button class="btn" type="button" onclick="State()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Phone Number</td>
+          <td>
+            <button class="btn" type="button" onclick="PhoneNumber()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td>
+            <button class="btn" type="button" onclick="Name()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Location</td>
+          <td>
+            <button class="btn" type="button" onclick="Locations()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <textarea id="myInput1" class="hideIt">Opening hours</textarea>
+    <textarea id="myInput2" class="hideIt">State</textarea>
+    <textarea id="myInput3" class="hideIt">Phone Number</textarea>
+    <textarea id="myInput4" class="hideIt">Name</textarea>
+    <textarea id="myInput5" class="hideIt">Location</textarea>
   </div>
+
   {% endblock %} {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>

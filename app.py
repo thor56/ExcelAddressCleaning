@@ -13,6 +13,10 @@ Bootstrap(app)
 @app.route('/', methods=['GET', 'POST'])
 def index():
     return render_template("index.html")
+    
+@app.route('/copyToClipboard', methods=['GET', 'POST'])
+def copyToClipboard():
+    return "Clicked"
 
 @app.route('/data', methods=['GET', 'POST'])
 def data():
