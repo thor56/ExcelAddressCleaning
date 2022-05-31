@@ -47,6 +47,7 @@ def process(df, filename1):
     df['Name, State,Pin'] = df['Name'] + ", " + df['State'] + ", " +  df['Pin'] 
     df['Location'] = df['Location'].map(location)
     print(df)
+    df = df.sort_values('Pin')
     df2 = pd.DataFrame()
     df2.insert(0,"Name, State,Pin",df['Name, State,Pin'],True)
     df2.insert(1,"Phone Number",df['Phone Number'],True)
@@ -54,6 +55,7 @@ def process(df, filename1):
     df2.insert(3,"Full Address",df['Full Address'],True)
     df2.insert(4,"Opening hours",df['Opening hours'],True)
     print(df2)
+   
 
     output = df2.to_csv(index=False)
     os.remove(filename1)
