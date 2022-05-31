@@ -1,8 +1,10 @@
 
 import csv
 import os
+import string
 from flask import Flask, Response, render_template, request
 from flask_bootstrap import Bootstrap
+from numpy import NaN
 
 import pandas as pd
 
@@ -62,9 +64,13 @@ def process(df, filename1):
                  "attachment; filename={}".format("after_" + filename1)})
 
 
-def stemmingWords(sentence):
+def stemmingWords(sentence ):
     dict_ = {'monday': 'Mon' , 'tuesday' : 'Tue', 'wednesday': 'Wed','thursday': 'Thu',  'friday': 'Fri','saturday': 'Sat', 'sunday': 'Sun'  }
-    str2 =  " ".join([dict_.get(w,w) for w in sentence.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    if sentence == NaN or str(sentence) == "nan":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
     dict2 = dict()
     for x in lst2:
@@ -72,7 +78,10 @@ def stemmingWords(sentence):
 
     l = [] 
     for x in dict_: 
-        l.append(dict2[dict_[x]])
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
 
     return " <br> ".join(l)
 
