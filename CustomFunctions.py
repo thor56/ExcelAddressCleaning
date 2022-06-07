@@ -65,14 +65,14 @@ def stemmingWords(sentence ):
 
 
 def separatelocality1(sentence):
-    return sentence.replace(", ",",").split(",")[0]
+    return str(sentence).replace(", ",",").split(",")[0]
 
 def separatelocality2(sentence):
     
-    lst = sentence.replace(", ",",").split(",")
+    lst = str(sentence).replace(", ",",").split(",")
     
     if len(lst) > 1:
-        return sentence.replace(", ",",").split(",")[1]
+        return str(sentence).replace(", ",",").split(",")[1]
     return ""
 
 # (432) 758-2992
