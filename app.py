@@ -65,7 +65,9 @@ def ScrapAnchor():
 
     for link in soup.find_all('a'):
         if not link.find('img'):
-            df.loc[len(df.index)] = [link.text,link.get('href')] 
+            link_ = str(link.get('href')).lower()
+            if "cite" not in link_ and "http" not in link_:
+                df.loc[len(df.index)] = [link.text,link.get('href')] 
     
     print(df)
 
