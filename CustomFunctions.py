@@ -139,6 +139,9 @@ def mondayCol(sentence ):
         return ""
     
     str3 = str(sentence)
+  
+
+
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
     print(lst2)
@@ -361,7 +364,7 @@ def phonenum(sentence):
 
 def addrForIframe(sentence):
     sentences = str(sentence)
-    return sentences.replace(" ","+")
+    return "+" + sentences.replace(" ","+")
 
 # <a href="https://www.google.com/maps?cid=3184598461857161322" target="_blank" rel="nofollow">Get Directions</a>
 def location(sentence):
