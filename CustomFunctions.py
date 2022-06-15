@@ -41,6 +41,56 @@ def process(df, filename1):
         headers={"Content-disposition":
                  "attachment; filename={}".format("after_" + filename1)})
 
+def processtwo(df, filename1):
+
+    # df = pd.read_csv('Before.csv')
+    # df['Opening hours'] = df['Opening hours'].map(stemmingWords)
+    # df['Pin'] = df['State'].map(separatelocality2)
+    # df['State'] = df['State'].map(separatelocality1)
+    
+    df['Phone'] = df['Phone'].map(phonenum)
+    df['Review URL'] = df['Review URL'].map(reviews)    
+    df['Monday'] = df['Opening hours'].map(mondayCol)
+    df['Tuesday'] = df['Opening hours'].map(tuesdayCol)
+    df['Wednesday'] = df['Opening hours'].map(wednesdayCol)
+    df['Thursday'] = df['Opening hours'].map(thursdayCol)
+    df['Friday'] = df['Opening hours'].map(fridayCol)
+    df['Saturday'] = df['Opening hours'].map(saturdayCol)
+    df['Sunday'] = df['Opening hours'].map(sundayCol)
+    
+    print(df)
+    # df = df.sort_values('Pin')
+
+    df2 = pd.DataFrame()
+    df2.insert(0,"Name",df['Name'],True)
+    df2.insert(1,"Full Address",df['Fulladdress'],True)
+    df2.insert(2,"Street",df['Street'],True)
+    df2.insert(3,"Categories",df['Categories'],True)
+    df2.insert(4,"Phone",df['Phone'],True)
+    df2.insert(5,"Average Rating",df['Average Rating'],True)
+    df2.insert(6,"Review URL",df['Review URL'],True)
+    df2.insert(7,"Google Maps URL",df['Google Maps URL'],True)
+    df2.insert(8,"Latitude",df['Latitude'],True)
+    df2.insert(9,"Longitude",df['Longitude'],True)
+    df2.insert(10,"Monday",df['Monday'],True)
+    df2.insert(11,"Tuesday",df['Tuesday'],True)
+    df2.insert(12,"Wednesday",df['Wednesday'],True)
+    df2.insert(13,"Thursday",df['Thursday'],True)
+    df2.insert(14,"Friday",df['Friday'],True)
+    df2.insert(15,"Saturday",df['Saturday'],True)
+    df2.insert(16,"Sunday",df['Sunday'],True)
+    print(df2)
+   
+
+    output = df2.to_csv(index=False)
+    os.remove(filename1)
+    return Response(
+        output ,
+        mimetype="text/csv",
+        headers={"Content-disposition":
+                 "attachment; filename={}".format("after_" + filename1)})
+
+
 
 def stemmingWords(sentence ):
     dict_ = {'monday': 'Mon' , 'tuesday' : 'Tue', 'wednesday': 'Wed','thursday': 'Thu',  'friday': 'Fri','saturday': 'Sat', 'sunday': 'Sun'  }
@@ -63,6 +113,213 @@ def stemmingWords(sentence ):
 
     return " <br> ".join(l)
 
+def mondayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Mon"]
+
+def mondayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Mon"].split(":")[1]
+
+def tuesdayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Tue"].split(":")[1]
+
+def wednesdayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Wed"].split(":")[1]
+
+def thursdayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Thu"].split(":")[1]
+
+def fridayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Fri"].split(":")[1]
+
+def saturdayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Sat"].split(":")[1]
+
+def sundayCol(sentence ):
+    
+    dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
+    if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
+        return ""
+    
+    str3 = str(sentence)
+    str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
+    lst2 = str2.split(" <br> ")
+    print(lst2)
+    dict2 = dict()
+    for x in lst2:
+        dict2[x[:3]] = x
+    
+    print(dict2['Mon'])
+
+    l = [] 
+    for x in dict_: 
+        try:
+            l.append(dict2[dict_[x]])
+        except:
+            print(dict2)
+            
+
+    return dict2["Sun"].split(":")[1]
 
 def separatelocality1(sentence):
     return str(sentence).replace(", ",",").split(",")[0]
@@ -88,3 +345,6 @@ def location(sentence):
     sentences = str(sentence)
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
 
+def reviews(sentence):
+    sentences = str(sentence)
+    return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Reviews on Google</a>"

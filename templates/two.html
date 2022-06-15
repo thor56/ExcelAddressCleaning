@@ -264,36 +264,72 @@
   }
 </style>
 <script>
-  function Openinghours() {
-    var copyText = document.getElementById("myInput1");
-    copyText.select();
-    document.execCommand("copy");
-    console.log(document.getElementById("myInput1").innerHTML);
-  }
-
-  function State() {
+  function Name() {
     var copyText = document.getElementById("myInput2");
     copyText.select();
     document.execCommand("copy");
     console.log(document.getElementById("myInput2").innerHTML);
   }
-  function PhoneNumber() {
+  function Fulladdress() {
     var copyText = document.getElementById("myInput3");
     copyText.select();
     document.execCommand("copy");
     console.log(document.getElementById("myInput3").innerHTML);
   }
-  function Name() {
+  function Street() {
     var copyText = document.getElementById("myInput4");
     copyText.select();
     document.execCommand("copy");
     console.log(document.getElementById("myInput4").innerHTML);
   }
-  function Locations() {
+  function Categories() {
     var copyText = document.getElementById("myInput5");
     copyText.select();
     document.execCommand("copy");
     console.log(document.getElementById("myInput5").innerHTML);
+  }
+  function Phone() {
+    var copyText = document.getElementById("myInput6");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput6").innerHTML);
+  }
+  function AverageRating() {
+    var copyText = document.getElementById("myInput7");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput7").innerHTML);
+  }
+  function ReviewURL() {
+    var copyText = document.getElementById("myInput8");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput8").innerHTML);
+  }
+  function GoogleMapsURL() {
+    var copyText = document.getElementById("myInput9");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput9").innerHTML);
+  }
+  function Latitude() {
+    var copyText = document.getElementById("myInput10");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput10").innerHTML);
+  }
+  function Longitude() {
+    var copyText = document.getElementById("myInput11");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput11").innerHTML);
+  }
+
+  function Openinghours() {
+    var copyText = document.getElementById("myInput1");
+    copyText.select();
+    document.execCommand("copy");
+    console.log(document.getElementById("myInput1").innerHTML);
   }
 </script>
 <script
@@ -343,7 +379,7 @@
     </div>
   </nav>
   <div class="file-upload">
-    <form class="" action="data" method="post" enctype="multipart/form-data">
+    <form class="" action="datatwo" method="post" enctype="multipart/form-data">
       <input type="file" name="csvfile" class="file-upload-btn" />
 
       <input type="submit" name="" value="Submit" class="btn btn-primary" />
@@ -364,30 +400,6 @@
       </thead>
       <tbody>
         <tr>
-          <td>Opening hours</td>
-          <td>
-            <button class="btn" type="button" onclick="Openinghours()">
-              <i class="fa fa-copy"></i>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>State</td>
-          <td>
-            <button class="btn" type="button" onclick="State()">
-              <i class="fa fa-copy"></i>
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>Phone Number</td>
-          <td>
-            <button class="btn" type="button" onclick="PhoneNumber()">
-              <i class="fa fa-copy"></i>
-            </button>
-          </td>
-        </tr>
-        <tr>
           <td>Name</td>
           <td>
             <button class="btn" type="button" onclick="Name()">
@@ -396,9 +408,82 @@
           </td>
         </tr>
         <tr>
-          <td>Location</td>
+          <td>Fulladdress</td>
           <td>
-            <button class="btn" type="button" onclick="Locations()">
+            <button class="btn" type="button" onclick="Fulladdress()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Street</td>
+          <td>
+            <button class="btn" type="button" onclick="Street()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Categories</td>
+          <td>
+            <button class="btn" type="button" onclick="Categories()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Phone</td>
+          <td>
+            <button class="btn" type="button" onclick="Phone()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Average Rating</td>
+          <td>
+            <button class="btn" type="button" onclick="AverageRating()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Review URL</td>
+          <td>
+            <button class="btn" type="button" onclick="ReviewURL()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Google Maps URL</td>
+          <td>
+            <button class="btn" type="button" onclick="GoogleMapsURL()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Latitude</td>
+          <td>
+            <button class="btn" type="button" onclick="Latitude()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td>Longitude</td>
+          <td>
+            <button class="btn" type="button" onclick="Longitude()">
+              <i class="fa fa-copy"></i>
+            </button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>Opening hours</td>
+          <td>
+            <button class="btn" type="button" onclick="Openinghours()">
               <i class="fa fa-copy"></i>
             </button>
           </td>
@@ -406,15 +491,35 @@
       </tbody>
     </table>
     <textarea id="myInput1" class="hideIt">Opening hours</textarea>
-    <textarea id="myInput2" class="hideIt">State</textarea>
-    <textarea id="myInput3" class="hideIt">Phone Number</textarea>
-    <textarea id="myInput4" class="hideIt">Name</textarea>
-    <textarea id="myInput5" class="hideIt">Location</textarea>
+    <textarea id="myInput2" class="hideIt">Name</textarea>
+    <textarea id="myInput3" class="hideIt">Fulladdress</textarea>
+    <textarea id="myInput4" class="hideIt">Street</textarea>
+    <textarea id="myInput5" class="hideIt">Categories</textarea>
+    <textarea id="myInput6" class="hideIt">Phone</textarea>
+    <textarea id="myInput7" class="hideIt">Average Rating</textarea>
+    <textarea id="myInput8" class="hideIt">Review URL</textarea>
+    <textarea id="myInput9" class="hideIt">Google Maps URL</textarea>
+    <textarea id="myInput10" class="hideIt">Latitude</textarea>
+    <textarea id="myInput11" class="hideIt">Longitude</textarea>
   </div>
 
   {% endblock %} {% block scripts %}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
+
   {{super()}} {% endblock %}
 </div>

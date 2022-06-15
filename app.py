@@ -38,6 +38,25 @@ def data():
         return process(df, filename)
     return "None"
 
+@app.route('/two', methods=['GET', 'POST'])
+def two():
+    return render_template("two.html")
+    
+
+@app.route('/datatwo', methods=['GET', 'POST'])
+def datatwo():
+    filename = ""
+    if request.method == 'POST':
+        f = request.files['csvfile']
+        if f.filename == '':
+            f = request.files['csvfile1']
+        f.save( f.filename)
+        filename = f.filename
+        df = pd.read_csv(f.filename)
+        print(df)
+        return processtwo(df, filename)
+    return "None"
+
 
 @app.route('/anchor', methods=['GET', 'POST'])
 def anchor():
