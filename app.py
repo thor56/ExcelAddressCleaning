@@ -34,7 +34,7 @@ def data():
         f.save( f.filename)
         filename = f.filename
         df = pd.read_csv(f.filename)
-        print(df)
+        #(df)
         return process(df, filename)
     return "None"
 
@@ -53,7 +53,7 @@ def datatwo():
         f.save( f.filename)
         filename = f.filename
         df = pd.read_csv(f.filename)
-        print(df)
+        #(df)
         return processtwo(df, filename)
     return "None"
 
@@ -88,7 +88,7 @@ def ScrapAnchor():
             if link_ != "" and  "cite" not in link_ and "http" not in link_ and "//" not in link_:
                 df.loc[len(df.index)] = [link.text,link.get('href')] 
     
-    print(df)
+    #(df)
 
 
     output = df.to_csv(index=False)

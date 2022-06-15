@@ -50,6 +50,7 @@ def processtwo(df, filename1):
     
     df['Phone'] = df['Phone'].map(phonenum)
     df['Review URL'] = df['Review URL'].map(reviews)    
+    df['Google Maps URL'] = df['Google Maps URL'].map(googleMapsUrl)    
     df['Monday'] = df['Opening hours'].map(mondayCol)
     df['Tuesday'] = df['Opening hours'].map(tuesdayCol)
     df['Wednesday'] = df['Opening hours'].map(wednesdayCol)
@@ -57,28 +58,46 @@ def processtwo(df, filename1):
     df['Friday'] = df['Opening hours'].map(fridayCol)
     df['Saturday'] = df['Opening hours'].map(saturdayCol)
     df['Sunday'] = df['Opening hours'].map(sundayCol)
+    df['iFrame'] = "<iframe src=\"https://maps.google.com/maps?q=" + df['Name'] + df['Fulladdress'].map(addrForIframe) + "&output=embed\" width=\"100%\" height=\"450\" frameborder=\"0\" style=\"border:0\" allowfullscreen></iframe>"
+    df['Status'] = "draft"
+    df['Interlink2'] = ""
+    df['Interlink1'] = ""
+    df['Category'] = ""
+    df['Tag1'] = ""
+    df['Tag2'] = ""
+    df['None'] = "None"
+
+
     
     print(df)
     # df = df.sort_values('Pin')
 
     df2 = pd.DataFrame()
-    df2.insert(0,"Name",df['Name'],True)
-    df2.insert(1,"Full Address",df['Fulladdress'],True)
-    df2.insert(2,"Street",df['Street'],True)
-    df2.insert(3,"Categories",df['Categories'],True)
-    df2.insert(4,"Phone",df['Phone'],True)
-    df2.insert(5,"Average Rating",df['Average Rating'],True)
-    df2.insert(6,"Review URL",df['Review URL'],True)
-    df2.insert(7,"Google Maps URL",df['Google Maps URL'],True)
-    df2.insert(8,"Latitude",df['Latitude'],True)
-    df2.insert(9,"Longitude",df['Longitude'],True)
-    df2.insert(10,"Monday",df['Monday'],True)
-    df2.insert(11,"Tuesday",df['Tuesday'],True)
-    df2.insert(12,"Wednesday",df['Wednesday'],True)
-    df2.insert(13,"Thursday",df['Thursday'],True)
-    df2.insert(14,"Friday",df['Friday'],True)
-    df2.insert(15,"Saturday",df['Saturday'],True)
-    df2.insert(16,"Sunday",df['Sunday'],True)
+    df2.insert(0,"None",df['None'],True)
+    df2.insert(1,"Name",df['Name'],True)
+    df2.insert(2,"Full Address",df['Fulladdress'],True)
+    df2.insert(3,"Street",df['Street'],True)
+    df2.insert(4,"Categories",df['Categories'],True)
+    df2.insert(5,"Phone",df['Phone'],True)
+    df2.insert(6,"Average Rating",df['Average Rating'],True)
+    df2.insert(7,"Review URL",df['Review URL'],True)
+    df2.insert(8,"Google Maps URL",df['Google Maps URL'],True)
+    df2.insert(9,"Latitude",df['Latitude'],True)
+    df2.insert(10,"Longitude",df['Longitude'],True)
+    df2.insert(11,"Monday",df['Monday'],True)
+    df2.insert(12,"Tuesday",df['Tuesday'],True)
+    df2.insert(13,"Wednesday",df['Wednesday'],True)
+    df2.insert(14,"Thursday",df['Thursday'],True)
+    df2.insert(15,"Friday",df['Friday'],True)
+    df2.insert(16,"Saturday",df['Saturday'],True)
+    df2.insert(17,"Sunday",df['Sunday'],True)
+    df2.insert(18,"iFrame",df['iFrame'],True)
+    df2.insert(19,"Status",df['Status'],True)
+    df2.insert(20,"Interlink1",df['Interlink1'],True)
+    df2.insert(21,"Interlink2",df['Interlink2'],True)
+    df2.insert(22,"Category",df['Category'],True)
+    df2.insert(23,"Tag1",df['Tag1'],True)
+    df2.insert(24,"Tag1",df['Tag1'],True)
     print(df2)
    
 
@@ -340,6 +359,10 @@ def phonenum(sentence):
 #     return "<a href=\"tel:+1 " + sentence.replace("(","").replace(")","-").replace(" ","") + "\" rel=\"nofollow\">+1 432-758-2992</a>"
     return "<a href=\"tel:+1 " + num + "\" rel=\"nofollow\">+1 " + num + "</a>"
 
+def addrForIframe(sentence):
+    sentences = str(sentence)
+    return sentences.replace(" ","+")
+
 # <a href="https://www.google.com/maps?cid=3184598461857161322" target="_blank" rel="nofollow">Get Directions</a>
 def location(sentence):
     sentences = str(sentence)
@@ -348,3 +371,8 @@ def location(sentence):
 def reviews(sentence):
     sentences = str(sentence)
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Reviews on Google</a>"
+
+def googleMapsUrl(sentence):
+    sentences = str(sentence)
+    return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
+
