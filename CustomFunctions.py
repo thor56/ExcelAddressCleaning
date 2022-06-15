@@ -97,7 +97,7 @@ def processtwo(df, filename1):
     df2.insert(21,"Interlink2",df['Interlink2'],True)
     df2.insert(22,"Category",df['Category'],True)
     df2.insert(23,"Tag1",df['Tag1'],True)
-    df2.insert(24,"Tag1",df['Tag1'],True)
+    df2.insert(24,"Tag2",df['Tag2'],True)
     print(df2)
    
 
