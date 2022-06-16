@@ -140,12 +140,12 @@ def stemmingWords(sentence ):
 
 def mondayCol(sentence ):
     
+
     dict_ = {'monday': 'Monday' , 'tuesday' : 'Tuesday', 'wednesday': 'Wednesday','thursday': 'Thursday',  'friday': 'Friday','saturday': 'Saturday', 'sunday': 'Sunday'  }
     if sentence == NaN or str(sentence) == "nan" or str(sentence) == "":
         return ""
     
-    str3 = str(sentence)
-  
+    str3 = str(sentence) 
 
 
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
@@ -156,6 +156,9 @@ def mondayCol(sentence ):
         dict2[x[:3]] = x
     
     print(dict2['Mon'])
+    # Monday : 6 : 30am-10pm
+    if (dict2['Mon'].count(":") > 1):
+        return dict2['Mon'].split(":",1)[1]
 
     l = [] 
     for x in dict_: 
@@ -174,6 +177,9 @@ def mondayCol(sentence ):
         return ""
     
     str3 = str(sentence)
+   
+   
+
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
     print(lst2)
@@ -190,6 +196,9 @@ def mondayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Mon"].split(":",1)[1].replace(" : ",":")
+
 
     return dict2["Mon"].split(":")[1]
 
@@ -215,7 +224,10 @@ def tuesdayCol(sentence ):
             l.append(dict2[dict_[x]])
         except:
             print(dict2)
-            
+
+    if str3.count(":") > 7:
+            return dict2["Tue"].split(":",1)[1].replace(" : ",":")
+
 
     return dict2["Tue"].split(":")[1]
 
@@ -242,6 +254,8 @@ def wednesdayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Wed"].split(":",1)[1].replace(" : ",":")
 
     return dict2["Wed"].split(":")[1]
 
@@ -268,6 +282,8 @@ def thursdayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Thu"].split(":",1)[1].replace(" : ",":")
 
     return dict2["Thu"].split(":")[1]
 
@@ -294,6 +310,8 @@ def fridayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Fri"].split(":",1)[1].replace(" : ",":")
 
     return dict2["Fri"].split(":")[1]
 
@@ -320,6 +338,8 @@ def saturdayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Sat"].split(":",1)[1].replace(" : ",":")
 
     return dict2["Sat"].split(":")[1]
 
@@ -346,6 +366,8 @@ def sundayCol(sentence ):
         except:
             print(dict2)
             
+    if str3.count(":") > 7:
+        return dict2["Sun"].split(":",1)[1].replace(" : ",":")
 
     return dict2["Sun"].split(":")[1]
 
