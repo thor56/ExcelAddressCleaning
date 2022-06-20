@@ -66,6 +66,7 @@ def processtwo(df, filename1):
     df['Tag1'] = ""
     df['Tag2'] = ""
     df['None'] = "None"
+    df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
     
 
 
@@ -100,8 +101,9 @@ def processtwo(df, filename1):
     df2.insert(22,"Category",df['Category'],True)
     df2.insert(23,"Tag1",df['Tag1'],True)
     df2.insert(24,"Tag2",df['Tag2'],True)
+    df2.insert(25,"Block",df['Block'],True)
     if 'Review Count' in df.columns:
-        df2.insert(25,"Review Count",df['Review Count'],True)
+        df2.insert(26,"Review Count",df['Review Count'],True)
 
 
     print(df2)
