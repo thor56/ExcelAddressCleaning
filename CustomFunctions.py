@@ -4,6 +4,7 @@ import string
 from flask import Flask, Response, render_template, request
 from flask_bootstrap import Bootstrap
 from numpy import NaN
+from geopy.geocoders import Nominatim
 
 import pandas as pd
 
@@ -64,9 +65,10 @@ def processtwo(df, filename1):
     df['Interlink1'] = ""
     df['Category'] = ""
     df['Tag1'] = ""
-    df['Tag2'] = ""
+    df['Tag2'] = df['Fulladdress'].map(fetchState)
     df['None'] = "None"
     df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
+
     
 
 
@@ -408,4 +410,20 @@ def reviews(sentence):
 def googleMapsUrl(sentence):
     sentences = str(sentence)
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
+
+def fetchState(sentence):
+    sentences = str(sentence)
+    if sentences == "" or sentences.lower == "nan" or sentences == " " or len(sentences) < 10 :
+        return ""
+    # address is a String e.g. 'Berlin, Germany'
+    # addressdetails=True does the magic and gives you also the details
+    # location = geolocator.geocode(address, addressdetails=True)
+    # print(location.raw)
+    geolocator = Nominatim(user_agent="geoapiExercises")
+    location = geolocator.geocode(", ".join(sentences.split(",")[-2:]), addressdetails=True)
+    
+    try:
+        return str(location.raw['address']['state'])
+    except:
+        return ""
 
