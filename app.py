@@ -100,5 +100,38 @@ def ScrapAnchor():
             
 
 
+@app.route('/highlight', methods=['GET', 'POST'])
+def Highlight():
+    return render_template("highlight.html")
+     
+@app.route('/ScrapHighlight', methods=['GET', 'POST'])
+def ScrapHighlight(): 
+
+    url_ = request.form['urlTS']
+    if url_ == "":
+        return "None"
+    # url="https://en.wikipedia.org/wiki/McDonald%27s#"
+
+    session = HTMLSession()
+    r = session.get(url_)
+
+    b  = requests.get(url_)
+    soup = BeautifulSoup(b.text, "lxml")
+
+    dict = {'BoldText':[],
+        'Link':[]
+       }
+  
+    # df = pd.DataFrame(dict)
+    bold_list = soup.find_all('b') + soup.find_all('strong')
+    italic_list = soup.find_all('i') + soup.find_all('em')
+
+    
+
+    # output = df.to_csv(index=False)
+    return render_template("highlightview.html", lis = bold_list, lis2 = italic_list)
+            
+
+
 if __name__ == "__main__":
     app.run(debug=True)

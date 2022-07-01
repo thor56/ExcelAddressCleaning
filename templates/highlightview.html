@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <table>
+      <thead>
+        <th>BoldText</th>
+      </thead>
+      <tbody>
+        {% for text_ in lis %}
+        <tr>
+          <td>{{text_}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table>
+      <thead>
+        <th>ItalicText</th>
+      </thead>
+      <tbody>
+        {% for text_ in lis2 %}
+        <tr>
+          <td>{{text_}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
