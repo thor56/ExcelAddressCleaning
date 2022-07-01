@@ -1,3 +1,4 @@
+from cmath import nan
 import csv
 import os
 import string
@@ -5,6 +6,7 @@ from flask import Flask, Response, render_template, request
 from flask_bootstrap import Bootstrap
 from numpy import NaN
 from geopy.geocoders import Nominatim
+import pgeocode
 
 import pandas as pd
 
@@ -23,7 +25,7 @@ def process(df, filename1):
     df['Phone Number'] = df['Phone Number'].map(phonenum)
     df['Name, State,Pin'] = df['Name'] + ", " + df['State'] + ", " +  df['Pin'] 
     df['Location'] = df['Location'].map(location)
-    print(df)
+    # print(df)
     df = df.sort_values('Pin')
     df2 = pd.DataFrame()
     df2.insert(0,"Name, State,Pin",df['Name, State,Pin'],True)
@@ -31,7 +33,7 @@ def process(df, filename1):
     df2.insert(2,"Location",df['Location'],True)
     df2.insert(3,"Full Address",df['Full Address'],True)
     df2.insert(4,"Opening hours",df['Opening hours'],True)
-    print(df2)
+    # print(df2)
    
 
     output = df2.to_csv(index=False)
@@ -65,7 +67,9 @@ def processtwo(df, filename1):
     df['Interlink1'] = ""
     df['Category'] = ""
     df['Tag1'] = ""
-    df['Tag2'] = df['Fulladdress'].map(fetchState)
+    df['Tag2'] = ""
+    # df['Tag2'] = df['Fulladdress'].map(fetchState)
+    # df['Tag2'] = df.apply(lambda x: fetchState(x['Latitude'], x['Longitude']), axis=1)
     df['None'] = "None"
     df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
 
@@ -74,7 +78,7 @@ def processtwo(df, filename1):
 
 
     
-    print(df)
+    #print(df)
     # df = df.sort_values('Pin')
 
     df2 = pd.DataFrame()
@@ -108,7 +112,7 @@ def processtwo(df, filename1):
         df2.insert(26,"Review Count",df['Review Count'],True)
 
 
-    print(df2)
+    #print(df2)
    
 
     output = df2.to_csv(index=False)
@@ -138,7 +142,8 @@ def stemmingWords(sentence ):
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
 
     return " <br> ".join(l)
 
@@ -154,12 +159,12 @@ def mondayCol(sentence ):
 
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
     # Monday : 6 : 30am-10pm
     if (dict2['Mon'].count(":") > 1):
         return dict2['Mon'].split(":",1)[1]
@@ -169,7 +174,8 @@ def mondayCol(sentence ):
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
 
     return dict2["Mon"]
@@ -186,19 +192,20 @@ def mondayCol(sentence ):
 
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Mon"].split(":",1)[1].replace(" : ",":")
@@ -215,19 +222,20 @@ def tuesdayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
 
     if str3.count(":") > 7:
             return dict2["Tue"].split(":",1)[1].replace(" : ",":")
@@ -244,19 +252,20 @@ def wednesdayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Wed"].split(":",1)[1].replace(" : ",":")
@@ -272,19 +281,20 @@ def thursdayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Thu"].split(":",1)[1].replace(" : ",":")
@@ -300,19 +310,20 @@ def fridayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Fri"].split(":",1)[1].replace(" : ",":")
@@ -328,19 +339,20 @@ def saturdayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Sat"].split(":",1)[1].replace(" : ",":")
@@ -356,19 +368,20 @@ def sundayCol(sentence ):
     str3 = str(sentence)
     str2 =  " ".join([dict_.get(w,w) for w in str3.replace(":"," : ").replace("["," ").replace("]"," ").replace(",","<br>").lower().split()])
     lst2 = str2.split(" <br> ")
-    print(lst2)
+    #print(lst2)
     dict2 = dict()
     for x in lst2:
         dict2[x[:3]] = x
     
-    print(dict2['Mon'])
+    #print(dict2['Mon'])
 
     l = [] 
     for x in dict_: 
         try:
             l.append(dict2[dict_[x]])
         except:
-            print(dict2)
+            #print(dict2)
+            pass
             
     if str3.count(":") > 7:
         return dict2["Sun"].split(":",1)[1].replace(" : ",":")
@@ -411,19 +424,37 @@ def googleMapsUrl(sentence):
     sentences = str(sentence)
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
 
-def fetchState(sentence):
-    sentences = str(sentence)
-    if sentences == "" or sentences.lower == "nan" or sentences == " " or len(sentences) < 10 :
-        return ""
+def fetchState(col1, col2):
+    sentences = str(col1)
+    sentences2 = str(col2)
+    # if sentences == "" or sentences.lower == "nan" or sentences == " " or len(sentences) < 10 :
+    #     return ""
+    # 
     # address is a String e.g. 'Berlin, Germany'
     # addressdetails=True does the magic and gives you also the details
     # location = geolocator.geocode(address, addressdetails=True)
-    # print(location.raw)
-    geolocator = Nominatim(user_agent="geoapiExercises")
-    location = geolocator.geocode(", ".join(sentences.split(",")[-2:]), addressdetails=True)
-    
+    # #print(location.raw)
+    # location = geolocator.geocode(sentences, addressdetails=True,timeout=None)
+    #  geolocator = Nominatim(user_agent="geoapiExercises")
+    # location = geolocator.geocode(", ".join(sentences.split(",")[-2:]), addressdetails=True
     try:
-        return str(location.raw['address']['state'])
+        geolocator = Nominatim(user_agent="geoapiExercises")
+        location = geolocator.reverse(str(col1)+","+str(col2))
     except:
         return ""
+    return location.raw['address']['state']
+    
+    # x = '40 SE Wyoming Blvd, Casper, WY 82609, United States'
+    # nomi = pgeocode.Nominatim('us')
+    # state_name = nomi.query_postal_code(str(sentences.split(",")[-2].split(" ")[-1]))['state_name']
+    # if state_name == pd.nan:
+    #     state_name = nomi.query_postal_code(str(sentences.split(",")[-1].split(" ")[-1]))['state_name']
+
+    # print(str(state_name))
+    # return state_name
+
+    # try:  ----------depricating for instance--------------
+    #     return str(location.raw['address']['state'])
+    # except:
+    #     return ""
 
