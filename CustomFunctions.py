@@ -72,6 +72,10 @@ def processtwo(df, filename1):
     # df['Tag2'] = df.apply(lambda x: fetchState(x['Latitude'], x['Longitude']), axis=1)
     df['None'] = "None"
     df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
+    df['Name2'] = "<strong>"+ df['Name'] + "</strong>"
+    df['Full Address 2'] = "<strong>"+ df['Fulladdress'] + "</strong>"
+    df['Categories 2'] = "<strong>" +  df['Categories']  + "</strong>"
+
 
     
 
@@ -84,32 +88,35 @@ def processtwo(df, filename1):
     df2 = pd.DataFrame()
     df2.insert(0,"None",df['None'],True)
     df2.insert(1,"Name",df['Name'],True)
-    df2.insert(2,"Full Address",df['Fulladdress'],True)
-    df2.insert(3,"Street",df['Street'],True)
-    df2.insert(4,"Categories",df['Categories'],True)
-    df2.insert(5,"Phone",df['Phone'],True)
-    df2.insert(6,"Average Rating",df['Average Rating'],True)
-    df2.insert(7,"Review URL",df['Review URL'],True)
-    df2.insert(8,"Google Maps URL",df['Google Maps URL'],True)
-    df2.insert(9,"Latitude",df['Latitude'],True)
-    df2.insert(10,"Longitude",df['Longitude'],True)
-    df2.insert(11,"Monday",df['Monday'],True)
-    df2.insert(12,"Tuesday",df['Tuesday'],True)
-    df2.insert(13,"Wednesday",df['Wednesday'],True)
-    df2.insert(14,"Thursday",df['Thursday'],True)
-    df2.insert(15,"Friday",df['Friday'],True)
-    df2.insert(16,"Saturday",df['Saturday'],True)
-    df2.insert(17,"Sunday",df['Sunday'],True)
-    df2.insert(18,"iFrame",df['iFrame'],True)
-    df2.insert(19,"Status",df['Status'],True)
-    df2.insert(20,"Interlink1",df['Interlink1'],True)
-    df2.insert(21,"Interlink2",df['Interlink2'],True)
-    df2.insert(22,"Category",df['Category'],True)
-    df2.insert(23,"Tag1",df['Tag1'],True)
-    df2.insert(24,"Tag2",df['Tag2'],True)
-    df2.insert(25,"Block",df['Block'],True)
+    df2.insert(2,"Name2",df['Name2'],True)
+    df2.insert(3,"Full Address",df['Fulladdress'],True)
+    df2.insert(4,"Full Address 2",df['Full Address 2'],True)
+    df2.insert(5,"Street",df['Street'],True)
+    df2.insert(6,"Categories",df['Categories'],True)
+    df2.insert(7,"Categories 2",df['Categories 2'],True)
+    df2.insert(8,"Phone",df['Phone'],True)
+    df2.insert(9,"Average Rating",df['Average Rating'],True)
+    df2.insert(10,"Review URL",df['Review URL'],True)
+    df2.insert(11,"Google Maps URL",df['Google Maps URL'],True)
+    df2.insert(12,"Latitude",df['Latitude'],True)
+    df2.insert(13,"Longitude",df['Longitude'],True)
+    df2.insert(14,"Monday",df['Monday'],True)
+    df2.insert(15,"Tuesday",df['Tuesday'],True)
+    df2.insert(16,"Wednesday",df['Wednesday'],True)
+    df2.insert(17,"Thursday",df['Thursday'],True)
+    df2.insert(18,"Friday",df['Friday'],True)
+    df2.insert(19,"Saturday",df['Saturday'],True)
+    df2.insert(20,"Sunday",df['Sunday'],True)
+    df2.insert(21,"iFrame",df['iFrame'],True)
+    df2.insert(22,"Status",df['Status'],True)
+    df2.insert(23,"Interlink1",df['Interlink1'],True)
+    df2.insert(24,"Interlink2",df['Interlink2'],True)
+    df2.insert(25,"Category",df['Category'],True)
+    df2.insert(26,"Tag1",df['Tag1'],True)
+    df2.insert(27,"Tag2",df['Tag2'],True)
+    df2.insert(28,"Block",df['Block'],True)
     if 'Review Count' in df.columns:
-        df2.insert(26,"Review Count",df['Review Count'],True)
+        df2.insert(29,"Review Count",df['Review Count'],True)
 
 
     #print(df2)
@@ -425,8 +432,7 @@ def googleMapsUrl(sentence):
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
 
 def fetchState(col1, col2):
-    sentences = str(col1)
-    sentences2 = str(col2)
+    
     # if sentences == "" or sentences.lower == "nan" or sentences == " " or len(sentences) < 10 :
     #     return ""
     # 
