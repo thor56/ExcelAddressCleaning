@@ -73,8 +73,8 @@ def processtwo(df, filename1):
     df['None'] = "None"
     df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
     df['Name2'] = "<strong>"+ df['Name'] + "</strong>"
-    df['Full Address 2'] = "<strong>"+ df['Fulladdress'] + "</strong>"
-    df['Categories 2'] = "<strong>" +  df['Categories']  + "</strong>"
+    df['Full Address 2'] =  df['Fulladdress'].map(addressStrong)
+    df['Categories 2'] = df['Categories'].map(categoriesSeparate) 
 
 
     
@@ -431,6 +431,7 @@ def googleMapsUrl(sentence):
     sentences = str(sentence)
     return "<a href=\"" + sentences + "\" target=\"_blank\" rel=\"nofollow\">Get Directions</a>"
 
+
 def fetchState(col1, col2):
     
     # if sentences == "" or sentences.lower == "nan" or sentences == " " or len(sentences) < 10 :
@@ -464,3 +465,14 @@ def fetchState(col1, col2):
     # except:
     #     return ""
 
+def addressStrong(sentence):
+    y = ''
+    for x in str(sentence).replace("  ","").split(" "):
+        y = y + "<strong>" + str(x) + "</strong>"
+    return y
+    
+def categoriesSeparate(sentence):
+    y = ''
+    for x in str(sentence).replace("  ","").split(","):
+        y = y + "<strong>" + str(x) + "</strong>"
+    return y
