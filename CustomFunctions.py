@@ -474,5 +474,8 @@ def addressStrong(sentence):
 def categoriesSeparate(sentence):
     y = ''
     for x in str(sentence).replace("  ","").split(","):
-        y = y + "<b>" + str(x) + "</b>"
+        if y == '':
+            y = y + "<b>" + str(x) + "</b>"
+        else:
+            y = y + ",<b>" + str(x) + "</b>"
     return y
