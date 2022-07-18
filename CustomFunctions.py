@@ -72,7 +72,7 @@ def processtwo(df, filename1):
     # df['Tag2'] = df.apply(lambda x: fetchState(x['Latitude'], x['Longitude']), axis=1)
     df['None'] = "None"
     df['Block'] = "<!-- wp:block {\"ref\":2442} /-->"
-    df['Name2'] = "<strong>"+ df['Name'] + "</strong>"
+    df['Name2'] = "<b>"+ df['Name'] + "</b>"
     df['Full Address 2'] =  df['Fulladdress'].map(addressStrong)
     df['Categories 2'] = df['Categories'].map(categoriesSeparate) 
 
@@ -468,11 +468,11 @@ def fetchState(col1, col2):
 def addressStrong(sentence):
     y = ''
     for x in str(sentence).replace("  ","").split(" "):
-        y = y + "<strong>" + str(x) + "</strong>"
+        y = y + "<b>" + str(x) + "</b>"
     return y
     
 def categoriesSeparate(sentence):
     y = ''
     for x in str(sentence).replace("  ","").split(","):
-        y = y + "<strong>" + str(x) + "</strong>"
+        y = y + "<b>" + str(x) + "</b>"
     return y
